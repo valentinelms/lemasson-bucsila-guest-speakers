@@ -149,7 +149,7 @@ const TOTAL_CHAPTERS = 4;
 let lenis = null;
 
 function initSmoothScroll() {
-  if (reduceMotion || typeof Lenis === 'undefined') return;
+  if (reduceMotion || typeof Lenis === 'undefined' || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   lenis = new Lenis({ smoothWheel: true, duration: 1.1 });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => lenis.raf(time * 1000));
@@ -1118,19 +1118,11 @@ function animateStat(id, target, duration) {
 }
 
 function boot() {
-  initSmoothScroll();
-  initHeroOrb();
-  renderStoryWords();
-  initWordReveal();
-  initHorizontalTimeline();
-  renderSpeakers();
-  initStageStepper();
-  initTakeaways();
-  initGame();
-
-  animateStat('statSessions', 1);
-  animateStat('statTakeaways', 6);
-
+  const steps = [initSmoothScroll, initHeroOrb, renderStoryWords, initWordReveal, initHorizontalTimeline, renderSpeakers, initStageStepper, initTakeaways, initGame];
+  steps.forEach((fn) => {
+    try { fn(); } catch (err) { console.error('Failed:', fn.name, err); }
+  });
+  try { animateStat('statSessions', 1); animateStat('statTakeaways', 6); } catch (e) {}
   if (typeof ScrollTrigger !== 'undefined') {
     window.addEventListener('load', () => ScrollTrigger.refresh());
   }
