@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <circle cx="100" cy="100" r="100" fill="#E4E0F2"/>
-  <circle cx="100" cy="82" r="38" fill="#14213D"/>
-  <path d="M30 190c6-46 40-74 70-74s64 28 70 74z" fill="#14213D"/>
-  <text x="100" y="178" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#F6F1E7" font-style="italic">NA</text>
-</svg>
